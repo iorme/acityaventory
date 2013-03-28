@@ -2,7 +2,7 @@
 class Item extends Controller{
 
     function __construct(){
-        parent::Controller();
+        parent::__construct();
         $this->load->Model('MItem');
     }
     

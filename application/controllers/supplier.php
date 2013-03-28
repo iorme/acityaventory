@@ -10,7 +10,7 @@ class Supplier extends Controller
     
     function __construct ()
     {
-       parent::Controller();
+       parent::__construct();
        $this->load->model('MSupplier');
        
     }

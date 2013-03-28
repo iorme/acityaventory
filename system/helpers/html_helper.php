@@ -2,11 +2,11 @@
 /**
  * CodeIgniter
  *
- * An open source application development framework for PHP 4.3.2 or newer
+ * An open source application development framework for PHP 5.1.6 or newer
  *
  * @package		CodeIgniter
  * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2010, EllisLab, Inc.
+ * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -40,9 +40,10 @@
  */
 if ( ! function_exists('heading'))
 {
-	function heading($data = '', $h = '1')
+	function heading($data = '', $h = '1', $attributes = '')
 	{
-		return "<h".$h.">".$data."</h".$h.">";
+		$attributes = ($attributes != '') ? ' '.$attributes : $attributes;
+		return "<h".$h.$attributes.">".$data."</h".$h.">";
 	}
 }
 
@@ -122,6 +123,10 @@ if ( ! function_exists('_list'))
 				$atts .= ' ' . $key . '="' . $val . '"';
 			}
 			$attributes = $atts;
+		}
+		elseif (is_string($attributes) AND strlen($attributes) > 0)
+		{
+			$attributes = ' '. $attributes;
 		}
 
 		// Write the opening list tag
@@ -216,16 +221,16 @@ if ( ! function_exists('img'))
 
 				if ($index_page === TRUE)
 				{
-					$img .= ' src="'.$CI->config->site_url($v).'" ';
+					$img .= ' src="'.$CI->config->site_url($v).'"';
 				}
 				else
 				{
-					$img .= ' src="'.$CI->config->slash_item('base_url').$v.'" ';
+					$img .= ' src="'.$CI->config->slash_item('base_url').$v.'"';
 				}
 			}
 			else
 			{
-				$img .= " $k=\"$v\" ";
+				$img .= " $k=\"$v\"";
 			}
 		}
 
@@ -258,7 +263,16 @@ if ( ! function_exists('doctype'))
 
 		if ( ! is_array($_doctypes))
 		{
-			if ( ! require_once(APPPATH.'config/doctypes.php'))
+			if (defined('ENVIRONMENT') AND is_file(APPPATH.'config/'.ENVIRONMENT.'/doctypes.php'))
+			{
+				include(APPPATH.'config/'.ENVIRONMENT.'/doctypes.php');
+			}
+			elseif (is_file(APPPATH.'config/doctypes.php'))
+			{
+				include(APPPATH.'config/doctypes.php');
+			}
+
+			if ( ! is_array($_doctypes))
 			{
 				return FALSE;
 			}
@@ -388,9 +402,9 @@ if ( ! function_exists('meta'))
 		$str = '';
 		foreach ($name as $meta)
 		{
-			$type 		= ( ! isset($meta['type']) OR $meta['type'] == 'name') ? 'name' : 'http-equiv';
-			$name 		= ( ! isset($meta['name'])) 	? '' 	: $meta['name'];
-			$content	= ( ! isset($meta['content']))	? '' 	: $meta['content'];
+			$type		= ( ! isset($meta['type']) OR $meta['type'] == 'name') ? 'name' : 'http-equiv';
+			$name		= ( ! isset($meta['name']))		? ''	: $meta['name'];
+			$content	= ( ! isset($meta['content']))	? ''	: $meta['content'];
 			$newline	= ( ! isset($meta['newline']))	? "\n"	: $meta['newline'];
 
 			$str .= '<meta '.$type.'="'.$name.'" content="'.$content.'" />'.$newline;

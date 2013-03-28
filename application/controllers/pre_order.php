@@ -3,7 +3,7 @@ class Pre_order extends Controller
 {
     function __construct ()
     {
-        parent::Controller();
+        parent::__construct();
         $this->load->model('MPre_order');
     }
     

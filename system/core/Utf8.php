@@ -2,42 +2,42 @@
 /**
  * CodeIgniter
  *
- * An open source application development framework for PHP 4.3.2 or newer
+ * An open source application development framework for PHP 5.1.6 or newer
  *
  * @package		CodeIgniter
  * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2010, EllisLab, Inc.
+ * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
- * @since		Version 1.0
+ * @since		Version 2.0
  * @filesource
  */
 
 // ------------------------------------------------------------------------
 
 /**
- * Output Class
+ * Utf8 Class
  *
- * Responsible for sending final output to browser
+ * Provides support for UTF-8 environments
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
- * @category	Unicode
+ * @category	UTF-8
  * @author		ExpressionEngine Dev Team
- * @link		http://codeigniter.com/user_guide/libraries/unicode.html
+ * @link		http://codeigniter.com/user_guide/libraries/utf8.html
  */
-class CI_Unicode {
+class CI_Utf8 {
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * Determines if UTF-8 support is to be enabled
-	 * 
+	 *
 	 */
-	function CI_Unicode()
+	function __construct()
 	{
-		log_message('debug', "Unicode Class Initialized");
-		
+		log_message('debug', "Utf8 Class Initialized");
+
 		global $CFG;
 
 		if (
@@ -47,8 +47,8 @@ class CI_Unicode {
 			AND $CFG->item('charset') == 'UTF-8'			// Application charset must be UTF-8
 			)
 		{
-			log_message('debug', "Unicode Class - UTF-8 Support Enabled");
-			
+			log_message('debug', "UTF-8 Support Enabled");
+
 			define('UTF8_ENABLED', TRUE);
 
 			// set internal encoding for multibyte string functions if necessary
@@ -66,13 +66,13 @@ class CI_Unicode {
 		}
 		else
 		{
-			log_message('debug', "Unicode Class - UTF-8 Support Disabled");
+			log_message('debug', "UTF-8 Support Disabled");
 			define('UTF8_ENABLED', FALSE);
-		}		
+		}
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Clean UTF-8 strings
 	 *
@@ -88,30 +88,30 @@ class CI_Unicode {
 		{
 			$str = @iconv('UTF-8', 'UTF-8//IGNORE', $str);
 		}
-		
+
 		return $str;
 	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Remove ASCII control characters
 	 *
 	 * Removes all ASCII control characters except horizontal tabs,
 	 * line feeds, and carriage returns, as all others can cause
 	 * problems in XML
-	 * 
+	 *
 	 * @access	public
 	 * @param	string
 	 * @return	string
 	 */
 	function safe_ascii_for_xml($str)
 	{
-		return preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S', '', $str);
+		return remove_invisible_characters($str, FALSE);
 	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Convert to UTF-8
 	 *
@@ -136,12 +136,12 @@ class CI_Unicode {
 		{
 			return FALSE;
 		}
-		
+
 		return $str;
 	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Is ASCII?
 	 *
@@ -157,9 +157,9 @@ class CI_Unicode {
 	}
 
 	// --------------------------------------------------------------------
-	
-}
-// End Unicode Class
 
-/* End of file Unicode.php */
-/* Location: ./system/core/Unicode.php */
+}
+// End Utf8 Class
+
+/* End of file Utf8.php */
+/* Location: ./system/core/Utf8.php */
