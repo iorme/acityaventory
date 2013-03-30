@@ -5,7 +5,7 @@
 #
 #/doc
 
-class Brand extends Controller
+class Brand extends CI_Controller
 {
     
     function __construct ()

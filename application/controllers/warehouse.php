@@ -5,7 +5,7 @@
 #
 #/doc
 
-class Warehouse extends Controller
+class Warehouse extends CI_Controller
 {
     
     function __construct ()

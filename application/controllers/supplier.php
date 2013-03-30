@@ -5,7 +5,7 @@
 #
 #/doc
 
-class Supplier extends Controller
+class Supplier extends CI_Controller
 {
     
     function __construct ()

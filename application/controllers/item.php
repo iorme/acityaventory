@@ -1,5 +1,5 @@
 <?php
-class Item extends Controller{
+class Item extends CI_Controller{
 
     function __construct(){
         parent::__construct();

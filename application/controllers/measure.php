@@ -5,7 +5,7 @@
 #
 #/doc
 
-class Measure extends Controller
+class Measure extends CI_Controller
 {
     
     function __construct ()

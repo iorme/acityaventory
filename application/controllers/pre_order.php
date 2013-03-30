@@ -1,5 +1,5 @@
 <?php
-class Pre_order extends Controller
+class Pre_order extends CI_Controller
 {
     function __construct ()
     {
