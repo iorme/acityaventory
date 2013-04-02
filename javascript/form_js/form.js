@@ -26,7 +26,7 @@ function addNotice(notice) {
 }
 $('#growl')
     .find('.close')
-    .live('click', function() {    
+    .on('click', function() {    
         $(this)
             .closest('.notice')
             .animate({

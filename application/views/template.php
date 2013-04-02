@@ -3,8 +3,8 @@
 <head>
 	<link type="text/css" href="<?php echo base_url()?>css/style.css" rel="stylesheet" />
 	<link type="text/css" href="<?php echo base_url()?>css/base/jquery.ui.all.css" rel="stylesheet" />
-	<script type="text/javascript" src="<?php echo base_url(); ?>javascript/jquery-1.4.2.min.js"></script>
-	<script type="text/javascript" src="<?php echo base_url(); ?>javascript/jquery-ui-1.8.2.custom.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>javascript/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>javascript/jquery-ui.min.js"></script>
 	<title>Acityaventory - Inventory Management System - <?php echo $title; ?></title>
 </head>
 <body>

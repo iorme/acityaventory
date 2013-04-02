@@ -19,13 +19,13 @@ $(document).ready(function(){
 			);
 	});
 	
-	$("a.remove_item").live('click', function (ev) { 
+	$("a.remove_item").on('click', function (ev) { 
     	if (ev.type == 'click') {
 	        $(this).parents(".records").fadeOut();
         }
      });
      
-     $(".items").live('click',function() {
+     $(".items").on('click',function() {
 	    if (!$(this).data('init')){	        
 	        $(this).data('init', true);
 	        $(this).autocomplete({
@@ -70,7 +70,7 @@ $(document).ready(function(){
 	     }  
      });
      
-     $(".amounts").live('keyup',function(){
+     $(".amounts").on('keyup',function(){
      	var num_item = $(this).attr("num");
      	
      	var item_price = "#item_price_";
@@ -91,7 +91,7 @@ $(document).ready(function(){
    		$(subtotal).val(value_subtotal);  	
      });
      
-     $(".prices").live('keyup',function(){
+     $(".prices").on('keyup',function(){
      	var num_item = $(this).attr("num");
      	
      	var item_price = "#item_price_";
