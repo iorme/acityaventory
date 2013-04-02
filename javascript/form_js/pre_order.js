@@ -1,5 +1,5 @@
 $(document).ready( function() {
-    $("#supplier").autocomplete({
+    $("#supplier").autocomplete({ 
       minLength: 0,
       source: 
         function(req, add){
