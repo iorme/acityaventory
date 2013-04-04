@@ -31,7 +31,7 @@ class MItem extends CI_Model{
     
     function getItem(){
         $id = $this->input->post('id');
-        $query = $this->db->getwhere('items',array('id'=>$id));
+        $query = $this->db->get_where('items',array('id'=>$id));
         return $query->row_array();		  
     }
     

@@ -23,7 +23,7 @@ class Item extends CI_Controller{
         $data['measure_list']= $this->MMeasure->getList(); // get group list from table measures
         $data['query']       = $this->MItem->getAll(); //get data from database
         $data['main']        = 'item/input';
-        $this->load->view('template',$data);
+        $this->blade->render('template',$data);
                
     }
     
@@ -45,11 +45,7 @@ class Item extends CI_Controller{
             if ($this->form_validation->run() == FALSE){ // if validation error
                 $validation = validation_errors();
                 $message = preg_replace("/(\r|\n)/","",$validation); //clear break
-                echo "
-                    <script type=\"text/javascript\" language=\"javascript\" charset=\"utf-8\">
-                        addNotice(\"<p>Error</p>$message\");
-                    </script>
-                ";
+                $this->blade->render('add_notice',array('message' => $message));
                 
                 
             }else{ // validation true
@@ -57,12 +53,12 @@ class Item extends CI_Controller{
                     $this->MItem->update();
                     $data['title']      = 'Items';
                     $data['query'] = $this->MItem->getAll();
-                    $this->load->view('item/show',$data);
+                    $this->blade->render('item/show',$data);
                 }else{ //don't have id then save / add data
                     $this->MItem->save();
                     $data['title']      = 'Items';
                     $data['query'] = $this->MItem->getAll();
-                    $this->load->view('item/show',$data);
+                    $this->blade->render('item/show',$data);
                 }
                 
             }
@@ -96,7 +92,7 @@ class Item extends CI_Controller{
                     $data['desc']['value']  = set_value('desc');
                     $data['query'] = $this->MItem->getAll(); //get data from database
                     $data['main']  =  'item/input';
-                    $this->load->view('template',$data);
+                    $this->blade->render('template',$data);
                 }else{
                     if ($this->input->post('id')>0){
                         $this->MItem->update();
@@ -134,7 +130,7 @@ class Item extends CI_Controller{
 		$data['min_stock']['value'] = $query['min_stock'];
 		$data['desc']['value']= $query['desc'];
 		$data['status_id']['value']     = $query['status'];
-        $this->load->view('item/edit',$data);
+        $this->blade->render('item/edit',$data);
     }
     
     function lookup_item()
@@ -167,7 +163,7 @@ class Item extends CI_Controller{
         }
         else
         {
-            $this->load->view('autocomplete/index',$data); //Load html view of search results
+            $this->blade->render('autocomplete/index',$data); //Load html view of search results
         }
     }
 

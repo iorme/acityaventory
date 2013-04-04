@@ -1,0 +1,1 @@
+<script type="text/javascript" language="javascript" charset="utf-8">addNotice("<p>Error</p>{{$message}}");</script>
