@@ -28,7 +28,7 @@ class Warehouse extends CI_Controller
         
         $data['query'] = $this->MWarehouse->getAll(); //get data from database
         $data['main']  =  'warehouse/input';
-        $this->load->view('template',$data);
+        $this->blade->render('template',$data);
     }
     
     function submit()
@@ -43,24 +43,19 @@ class Warehouse extends CI_Controller
             if ($this->form_validation->run() == FALSE){ // if validation error
                 $validation = validation_errors();
                 $message = preg_replace("/(\r|\n)/","",$validation); //clear break
-                echo "
-                    <script type=\"text/javascript\" language=\"javascript\" charset=\"utf-8\">
-                        addNotice(\"<p>Error</p>$message\");
-                    </script>
-                ";
-                
+                $this->blade->render('add_notice',array('message' => $message));
                 
             }else{ // validation true
                 if ($this->input->post('id')>0){ //if have id then update                    
                     $this->MWarehouse->update();
                     $data['title']      = 'Warehouses';
                     $data['query'] = $this->MWarehouse->getAll();
-                    $this->load->view('warehouse/show',$data);
+                    $this->blade->render('warehouse/show',$data);
                 }else{ //don't have id then save / add data
                     $this->MWarehouse->save();
                     $data['title']      = 'Warehouses';
                     $data['query'] = $this->MWarehouse->getAll();
-                    $this->load->view('warehouse/show',$data);
+                    $this->blade->render('warehouse/show',$data);
                 }
                 
             }
@@ -81,7 +76,7 @@ class Warehouse extends CI_Controller
                     $data['desc']['value']  = set_value('desc');
                     $data['query'] = $this->MWarehouse->getAll(); //get data from database
                     $data['main']  =  'warehouse/input';
-                    $this->load->view('template',$data);
+                    $this->blade->render('template',$data);
                 }else{
                     if ($this->input->post('id')>0){
                         $this->MWarehouse->update();

@@ -18,7 +18,7 @@ class Pre_order extends CI_Controller
         $data['title']      = "Pre Orders";
         $data['subheader']  = "Input Pre Order";
         $data['main']       = "pre_order/input";
-        $this->load->view('template',$data);
+        $this->blade->render('template',$data);
     }
     
     public function save()
@@ -36,7 +36,7 @@ class Pre_order extends CI_Controller
     	$data['subheader']	= "List Pre Order";
     	$data['main']		= "pre_order/show";
     	$data['query']		= $this->MPre_order->getAll();
-    	$this->load->view('template', $data);
+    	$this->blade->render('template', $data);
     }
     
 }

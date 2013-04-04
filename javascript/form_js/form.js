@@ -11,6 +11,26 @@ $(document).ready(function(){
         }
         return false;
     });
+    $('#growl').click(function(){
+        $(this)
+            .find('.notice')
+            .animate({
+                border: 'none',
+                height: 0,
+                marginBottom: 0,
+                marginTop: '-6px',
+                opacity: 0,
+                paddingBottom: 0,
+                paddingTop: 0,
+                queue: false
+            }, 1000, function() {
+                 $(this).remove();
+            });
+            $('input[type=text]').attr('disabled',false);
+            $('textarea').attr('disabled',false);   
+            return false;
+     });
+
 });
         
 
@@ -24,23 +44,3 @@ function addNotice(notice) {
     .appendTo('#growl')
     .fadeIn(1200);
 }
-$('#growl')
-    .find('.close')
-    .on('click', function() {    
-        $(this)
-            .closest('.notice')
-            .animate({
-                border: 'none',
-                height: 0,
-                marginBottom: 0,
-                marginTop: '-6px',
-                opacity: 0,
-                paddingBottom: 0,
-                paddingTop: 0,
-                queue: false
-            }, 1000, function() {
-                 $(this).remove();
-            });
-            
-            return false;
-     });
