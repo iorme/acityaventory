@@ -21,6 +21,10 @@
                 <td>Term Date</td>
                 <td>{{form_input($term_date)}}</td><td>&nbsp;</td>
             </tr>
+            <tr >
+                <td>Item Description</td>
+                <td>{{form_textarea($desc)}}</td><td>&nbsp;</td>
+            </tr>
         </table>
         <p></p>
         <p></p>

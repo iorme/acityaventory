@@ -19,7 +19,7 @@
  ?>
  @foreach ($query as $row)
  <?php $i++; ?>
- <tr class="record">";
+ <tr class="record">
  	<td style="border:1px solid;">{{$i}}</td>
  	<td style="border:1px solid;">{{$row->name}}</td>
  	<td style="border:1px solid;">{{$row->desc}}</td>

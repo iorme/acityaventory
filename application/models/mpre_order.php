@@ -24,7 +24,8 @@ class MPre_order  extends CI_Model
         $implode_date = $explode_date[2]."-".$explode_date[1]."-".$explode_date[0];    
         $term_date = $this->input->post('term_date');
 	    $explode_term_date = explode("-",$term_date);
-        $implode_term_date = $explode_term_date[2]."-".$explode_term_date[1]."-".$explode_term_date[0];    
+        $implode_term_date = $explode_term_date[2]."-".$explode_term_date[1]."-".$explode_term_date[0];  
+        $desc = $this->input->post('item_desc');  
 
         $supplier_id = $this->input->post('supplier_id');        
         
@@ -33,6 +34,7 @@ class MPre_order  extends CI_Model
                     'date' => $implode_date,
                     'term_date' => $implode_term_date,                          
                     'supplier_id' => $supplier_id,
+                    'desc' => $desc,
                   );
         $this->db->insert('pre_orders',$data); //insert to table transactions  
         $inserted_id = $this->db->insert_id(); //get last inserted transaction id

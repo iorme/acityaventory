@@ -18,12 +18,14 @@ class Pre_order extends CI_Controller
         $data['title']      = "Pre Orders";
         $data['subheader']  = "Input Pre Order";
         $data['main']       = "pre_order/input";
+        // $data['query'] = $this->MPre_order->getAll(); //get data from database
         $this->blade->render('template',$data);
     }
     
     public function save()
     {
         if ($this->input->post('submit')){
+
             $this->MPre_order->save();
             redirect('pre_order/index');
         }

@@ -17,7 +17,7 @@
  	$i=0;
  ?>
  @foreach ($query as $row)
- 	<php $i++; ?>
+ 	<?php $i++; ?>
  	<tr class="record">
  		<td style="border:1px solid;">{{$i}}</td>
  		<td style="border:1px solid;">{{$row->name}}</td>

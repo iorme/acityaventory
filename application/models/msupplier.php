@@ -61,9 +61,9 @@ class MSupplier extends CI_Model
     
     function seek( $keyword )
     {
-        
         $this->db->select('*')->from('suppliers');
         $this->db->like('name',$keyword,'after');
+        $this->db->or_like('code',$keyword,'after');
         $query = $this->db->get();    
         
         return $query->result();
