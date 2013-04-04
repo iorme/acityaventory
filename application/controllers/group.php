@@ -28,7 +28,7 @@ class Group extends CI_Controller
         
         $data['query'] = $this->MGroup->getAll(); //get data from database
         $data['main']  =  'group/input';
-        $this->load->view('template',$data);
+        $this->blade->render('template',$data);
     }
     
     function submit()
@@ -40,24 +40,18 @@ class Group extends CI_Controller
             if ($this->form_validation->run() == FALSE){ // if validation error
                 $validation = validation_errors();
                 $message = preg_replace("/(\r|\n)/","",$validation); //clear break
-                echo "
-                    <script type=\"text/javascript\" language=\"javascript\" charset=\"utf-8\">
-                        addNotice(\"<p>Error</p>$message\");
-                    </script>
-                ";
-                
-                
+                $this->blade->render('add_notice',array('message' => $message));
             }else{ // validation true
                 if ($this->input->post('id')>0){ //if have id then update                    
                     $this->MGroup->update();
                     $data['title']      = 'Groups';
                     $data['query'] = $this->MGroup->getAll();
-                    $this->load->view('group/show',$data);
+                    $this->blade->render('group/show',$data);
                 }else{ //don't have id then save / add data
                     $this->MGroup->save();
                     $data['title']      = 'Groups';
                     $data['query'] = $this->MGroup->getAll();
-                    $this->load->view('group/show',$data);
+                    $this->blade->render('group/show',$data);
                 }
                 
                 
@@ -76,7 +70,7 @@ class Group extends CI_Controller
                     $data['desc']['value']  = set_value('desc');
                     $data['query'] = $this->MGroup->getAll(); //get data from database
                     $data['main']  =  'group/input';
-                    $this->load->view('template',$data);
+                    $this->blade->render('template',$data);
                 }else{
                     if ($this->input->post('id')>0){
                         $this->MGroup->update();

@@ -28,7 +28,7 @@ class Measure extends CI_Controller
         
         $data['query'] = $this->MMeasure->getAll(); //get data from database
         $data['main']  =  'measure/input';
-        $this->load->view('template',$data);
+        $this->blade->render('template',$data);
     }
     
     function submit()
@@ -52,12 +52,12 @@ class Measure extends CI_Controller
                     $this->MMeasure->update();
                     $data['title']      = 'Measure';
                     $data['query'] = $this->MMeasure->getAll();
-                    $this->load->view('measure/show',$data);
+                    $this->blade->render('measure/show',$data);
                 }else{ //don't have id then save / add data
                     $this->MMeasure->save();
                     $data['title']      = 'Measure';
                     $data['query'] = $this->MMeasure->getAll();
-                    $this->load->view('measure/show',$data);
+                    $this->blade->render('measure/show',$data);
                 }
                 
             }
@@ -75,7 +75,7 @@ class Measure extends CI_Controller
                     $data['desc']['value']  = set_value('desc');
                     $data['query'] = $this->MMeasure->getAll(); //get data from database
                     $data['main']  =  'measure/input';
-                    $this->load->view('template',$data);
+                    $this->blade->render('template',$data);
                 }else{
                     if ($this->input->post('id')>0){
                         $this->MMeasure->update();
