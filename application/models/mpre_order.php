@@ -63,15 +63,15 @@ class MPre_order  extends CI_Model
     }
     
     function getAll(){ //get all pre order record
-    	$this->db->select("pre_orders.id,pre_orders.po_number");
-    	$this->db->select("date_format(pre_orders.date,'%d-%m-%Y') AS date");			
-    	$this->db->select("date_format(pre_orders.term_date,'%d-%m-%Y') AS term_date");
-    	$this->db->select("pre_orders.total,pre_orders.desc AS description");
-    	$this->db->select("suppliers.name AS supplier_name",FALSE);
-        $this->db->from('pre_orders');
-        $this->db->join('suppliers','suppliers.id=pre_orders.supplier_id');
-        $this->db->order_by('pre_orders.id','ASC');
-        $query = $this->db->get();
+    	$this->db->select("po.id,po.po_number");
+    	$this->db->select("date_format(po.date,'%d-%m-%Y') AS date",FALSE);			
+    	$this->db->select("date_format(po.term_date,'%d-%m-%Y') AS term_date",FALSE);
+    	$this->db->select("po.total,po.desc AS description");
+    	$this->db->select("s.name AS supplier_name",FALSE);
+        // $this->db->from('pre_orders');
+        $this->db->join('suppliers as s','s.id=po.supplier_id');
+        $this->db->order_by('po.id','ASC');
+        $query = $this->db->get('pre_orders as po');
     
         return $query->result();
     } 
