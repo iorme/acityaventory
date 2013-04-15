@@ -40,6 +40,7 @@ class MPre_order  extends CI_Model
         $inserted_id = $this->db->insert_id(); //get last inserted transaction id
         
         $i=1;
+        $total=0;
         foreach ($this->input->post('rows') as $key => $count ) //looping insert items to table _details
         {
           
@@ -47,6 +48,7 @@ class MPre_order  extends CI_Model
           $order_price	 = $this->input->post('item_price_'.$i);
           $amount  		 = $this->input->post('item_amount_'.$i);
           $desc 		 = $this->input->post('item_desc_'.$i);
+          $total         += ($order_price*$amount);
           $i++;
         
           $data_details = array(
@@ -57,6 +59,9 @@ class MPre_order  extends CI_Model
                                 'desc'           => $desc
                             );
           $this->db->insert('pre_orders_details',$data_details);
+
+          $this->db->where('id',$inserted_id);
+          $this->db->update('pre_orders',array('total' => $total));
           
         }           
         
